@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Ouvidoria Belford Roxo</string>
+    <string name="title_activity_main">Ouvidoria Belford Roxo</string>
+    <string name="label_button_abrir_protocolo">Abrir Protocolo</string>
+    <string name="logo_ouvidoria">logo_ouvidoria</string>
+    <string name="title_activity_formulario_protocolo">Abrir Protocolo</string>
+    <string name="nome">Nome</string>
+    <string name="celular">Celular - (00)0-0000-0000</string>
+    <string name="endereco">Endereço</string>
+    <string name="bairro">Bairro</string>
+    <string name="numero">Número</string>
+    <string name="reclamacao">Pedido/Reclamação/Sugestão</string>
+    <string name="enviar">Enviar</string>
+    <string name="informe_campos_obrigatorios">Informe os campos obrigatórios!</string>
+    <string name="verifique_sua_conexao">Verifique sua conexão!</string>
+    <string name="title_activity_result">Abertura de Protocolo</string>
+    <string name="label_button_ok">OK</string>
+    <string name="label_result_ok">Protocolo Aberto com Sucesso</string>
+    <string name="label_result_error">Erro ao Abrir Protocolo</string>
+    <string name="label_result_numero_protocolo">Número do Protocolo\n %s</string>
+</resources>
