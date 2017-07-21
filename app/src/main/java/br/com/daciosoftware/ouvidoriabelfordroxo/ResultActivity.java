@@ -13,6 +13,12 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.util.Calendar;
+
+import br.com.daciosoftware.ouvidoriabelfordroxo.dao.ProtocoloDAO;
+import br.com.daciosoftware.ouvidoriabelfordroxo.util.MyDateUtil;
+
 public class ResultActivity extends AppCompatActivity {
 
     @Override
@@ -26,6 +32,14 @@ public class ResultActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
 
+        Button buttonOK = (Button) findViewById(R.id.buttonResultOk);
+        buttonOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         String json = getIntent().getStringExtra("JSON");
         ImageView imageViewResult = (ImageView) findViewById(R.id.imageViewResult);
@@ -37,8 +51,19 @@ public class ResultActivity extends AppCompatActivity {
             if(jsonObject.getString("Status").equals("OK")){
                 imageViewResult.setImageResource(R.mipmap.ic_result_ok);
                 textViewResult.setText(R.string.label_result_ok);
-                String numeroProtocolo = String.format(getResources().getString(R.string.label_result_numero_protocolo), jsonObject.getString("Numero"));
-                textViewNumeroProtocolo.setText(numeroProtocolo);
+                String numeroAno = String.format(getResources().getString(R.string.label_result_numero_protocolo), jsonObject.getString("NumeroAno"));
+                Integer numero = jsonObject.getInt("Numero");
+                Integer ano = jsonObject.getInt("Ano");
+
+                Protocolo protocolo = new Protocolo();
+                protocolo.setNumero(numero);
+                protocolo.setAno(ano);
+
+                ProtocoloDAO protocoloDAO = new ProtocoloDAO(ResultActivity.this);
+                protocoloDAO.save(protocolo);
+
+                textViewNumeroProtocolo.setText(numeroAno);
+
             }else{
                 imageViewResult.setImageResource(R.mipmap.ic_result_error);
                 textViewResult.setText(R.string.label_result_error);
@@ -46,20 +71,11 @@ public class ResultActivity extends AppCompatActivity {
             }
 
 
-        }catch (JSONException e){
-            e.printStackTrace();
+        }catch (Exception e){
             imageViewResult.setImageResource(R.mipmap.ic_result_error);
             textViewResult.setText(R.string.label_result_error);
             textViewNumeroProtocolo.setText(e.getLocalizedMessage());
         }
-
-        Button buttonOK = (Button) findViewById(R.id.buttonResultOk);
-        buttonOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
 
     }

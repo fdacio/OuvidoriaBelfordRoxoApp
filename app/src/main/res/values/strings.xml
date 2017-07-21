@@ -18,4 +18,11 @@
     <string name="label_result_ok">Protocolo Aberto com Sucesso</string>
     <string name="label_result_error">Erro ao Abrir Protocolo</string>
     <string name="label_result_numero_protocolo">Número do Protocolo\n %s</string>
+    <string name="title_activity_list_protocolo">Protocolos Abertos</string>
+    <string name="data">Data</string>
+    <string name="situacao">Situação</string>
+    <string name="protocolos_abertos">Protocolos Abertos</string>
+    <string name="nao_ha_protocolos">NÃO HÁ PROTOCOLOS</string>
+    <string name="resolucao">Resolução</string>
+    <string name="title_activity_exemplo">ExemploActivity</string>
 </resources>

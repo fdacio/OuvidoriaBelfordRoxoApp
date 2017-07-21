@@ -5,8 +5,7 @@ package br.com.daciosoftware.ouvidoriabelfordroxo.util;
  */
 public abstract class Constantes {
     public static final String CATEGORIA = "OUVIDORIA";
-    public static final String SHARED_PREF = "OuvidoriaSharedPref";
-    public static final String URL_WEB_SERVICE_DEFAULT = "http://www.ouvidoriabelfordroxo.com.br/ws/?class=GravaProtocoloWS&method=gravarDados";
+    public static final String URL_WEB_SERVICE_DEFAULT = "http://www.ouvidoriabelfordroxo.com.br/ws/";
 
 
 }

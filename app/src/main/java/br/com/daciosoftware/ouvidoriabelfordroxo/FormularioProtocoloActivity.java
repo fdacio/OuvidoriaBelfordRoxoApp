@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import br.com.daciosoftware.ouvidoriabelfordroxo.db.Database;
 import br.com.daciosoftware.ouvidoriabelfordroxo.util.Constantes;
 import br.com.daciosoftware.ouvidoriabelfordroxo.util.DeviceInformation;
 import br.com.daciosoftware.ouvidoriabelfordroxo.util.DialogBox;
@@ -50,7 +51,8 @@ public class FormularioProtocoloActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_protocolo);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (toolbar != null) {
+        if (toolbar != null)
+        {
             toolbar.setLogo(R.mipmap.ic_launcher);
             toolbar.setTitle(getResources().getString(R.string.label_button_abrir_protocolo));
             setSupportActionBar(toolbar);
@@ -88,6 +90,12 @@ public class FormularioProtocoloActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Database.encerrarSessao();
     }
 
     private boolean validaForm(){
@@ -164,20 +172,18 @@ public class FormularioProtocoloActivity extends AppCompatActivity {
         this.protocolo.setBairro(bairro);
         this.protocolo.setReclamacao(reclamacao);
 
-        new HttpAsyncTask().execute(Constantes.URL_WEB_SERVICE_DEFAULT);
+        new HttpAsyncTask().execute(Constantes.URL_WEB_SERVICE_DEFAULT+"?class=GravaProtocoloWS&method=gravarDados");
     }
-
 
     private String Post(String url, Protocolo protocolo){
 
-        InputStream inputStream = null;
-        String result = "";
+        InputStream inputStream;
+        String result;
+        String json;
 
         try{
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
-
-            String json = "";
 
             JSONObject jsonObject = new JSONObject();
             jsonObject.accumulate("nome", protocolo.getNome());
@@ -203,19 +209,18 @@ public class FormularioProtocoloActivity extends AppCompatActivity {
             if(inputStream != null){
                 result = convertInputStreamToString(inputStream);
             }else{
-                result = "{'Status':'ERROR', 'Erro':'Tente mais tarde'}";
+                result = "{'Status':'ERROR', 'Error':'Tente mais tarde'}";
             }
         }catch (Exception e){
-            result = "{'Status':'ERROR', 'Erro':'Tente mais tarde}";
+            result = "{'Status':'ERROR', 'Error':'Tente mais tarde'}";
         }
 
         return result;
     }
 
-
     private String convertInputStreamToString(InputStream inputStream) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        String line = "";
+        String line;
         String result = "";
         while((line = bufferedReader.readLine()) != null){
             result += line;
