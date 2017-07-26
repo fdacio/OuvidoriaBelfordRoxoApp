@@ -98,7 +98,7 @@ public class Protocolo {
         return resultado;
     }
 
-    public void setResultado(String resolucao) {
+    public void setResultado(String resultado) {
         this.resultado = resultado;
     }
 

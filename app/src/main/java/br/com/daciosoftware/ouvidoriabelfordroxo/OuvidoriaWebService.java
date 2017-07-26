@@ -1,14 +1,11 @@
 package br.com.daciosoftware.ouvidoriabelfordroxo;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import br.com.daciosoftware.ouvidoriabelfordroxo.util.MyDateUtil;
 
